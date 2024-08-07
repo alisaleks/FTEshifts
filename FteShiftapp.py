@@ -53,9 +53,9 @@ def load_resources(resources_file):
 def load_mapping(mapping_file):
     return pd.read_excel(mapping_file)
 # Load data files
-shifts_file = 'C:/Users/aaleksan/OneDrive - Amplifon S.p.A/Documentos/python_alisa/FTEshifts/FTEshift_app/SFshifts_query.xlsx'
-resources_file = 'C:/Users/aaleksan/OneDrive - Amplifon S.p.A/Documentos/python_alisa/FTEshifts/FTEshift_app/resource_query.csv'
-mapping_file = 'C:/Users/aaleksan/OneDrive - Amplifon S.p.A/Documentos/python_alisa/FTEshifts/FTEshift_app/mapping.xlsx'
+shifts_file = 'SFshifts_query.xlsx'
+resources_file = 'resource_query.csv'
+mapping_file = 'mapping.xlsx'
 
 fteshifts = pd.read_excel(shifts_file, dtype=shifts_columns_to_string)
 resources = pd.read_csv(resources_file, dtype=resources_columns_to_string)
@@ -178,7 +178,7 @@ current_iso_year = datetime.today().isocalendar()[0]
 fteshifts = fteshifts[(fteshifts['Semana ISO'] >= start_iso_week) & (fteshifts['Año ISO'] == current_iso_year)]
 
 # Reading HCMShifts CSV
-hcm_file = 'C:/Users/aaleksan/OneDrive - Amplifon S.p.A/Documentos/python_alisa/FTEshifts/FTEshift_app/HCMShifts.csv'
+hcm_file = 'HCMShifts.csv'
 hcm_columns_to_string = {
     'Shop[Shop Code - Descr]': str,
     'Unique Employee[Employee Full Name]': str,

@@ -6,6 +6,14 @@ import plotly.express as px
 from datetime import datetime
 import pytz
 from st_aggrid import AgGrid, GridOptionsBuilder
+import locale
+
+# Set locale to Spanish (Spain) UTF-8
+try:
+    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+except locale.Error:
+    # Fallback for Windows
+    locale.setlocale(locale.LC_TIME, 'Spanish_Spain.1252')
 
 # Define the correct columns for the shifts and resources data
 shifts_columns_to_string = {

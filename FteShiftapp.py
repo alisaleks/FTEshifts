@@ -12,8 +12,8 @@ import locale
 try:
     locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 except locale.Error:
-    # Fallback for Windows
-    locale.setlocale(locale.LC_TIME, 'Spanish_Spain.1252')
+    # Fallback to default locale
+    st.warning("Locale 'es_ES.UTF-8' is not available. Using default locale settings.")
 
 # Define the correct columns for the shifts and resources data
 shifts_columns_to_string = {

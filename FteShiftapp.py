@@ -8,13 +8,6 @@ import pytz
 from st_aggrid import AgGrid, GridOptionsBuilder
 import locale
 
-# Set locale to Spanish (Spain) UTF-8
-try:
-    locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
-except locale.Error:
-    # Fallback to default locale
-    st.warning("Locale 'es_ES.UTF-8' is not available. Using default locale settings.")
-
 # Dictionary for Spanish month and day names
 spanish_months = {
     1: 'enero', 2: 'febrero', 3: 'marzo', 4: 'abril',

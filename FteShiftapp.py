@@ -15,6 +15,25 @@ except locale.Error:
     # Fallback to default locale
     st.warning("Locale 'es_ES.UTF-8' is not available. Using default locale settings.")
 
+# Dictionary for Spanish month and day names
+spanish_months = {
+    1: 'enero', 2: 'febrero', 3: 'marzo', 4: 'abril',
+    5: 'mayo', 6: 'junio', 7: 'julio', 8: 'agosto',
+    9: 'septiembre', 10: 'octubre', 11: 'noviembre', 12: 'diciembre'
+}
+
+spanish_days = {
+    0: 'lunes', 1: 'martes', 2: 'miércoles', 3: 'jueves',
+    4: 'viernes', 5: 'sábado', 6: 'domingo'
+}
+
+def format_date_to_spanish(date):
+    day_name = spanish_days[date.weekday()]
+    day = date.day
+    month = spanish_months[date.month]
+    year = date.year
+    return f"{day_name}, {day} de {month} de {year}"
+
 # Define the correct columns for the shifts and resources data
 shifts_columns_to_string = {
     'Shift[ShiftNumber]': str,
@@ -60,6 +79,7 @@ def load_resources(resources_file):
 @st.cache_data
 def load_mapping(mapping_file):
     return pd.read_excel(mapping_file)
+
 # Load data files
 shifts_file = 'SFshifts_query.xlsx'
 resources_file = 'resource_query.csv'
@@ -124,8 +144,9 @@ fteshifts = fteshifts.merge(mapping[['SHOP CODE', 'New Area Descr', 'AM']], left
 fteshifts.drop(columns=['SHOP CODE'], inplace=True)
 
 # Remove Sundays
-fteshifts['Día de la semana'] = fteshifts['StartTime'].dt.day_name(locale='es_ES')
-fteshifts = fteshifts[fteshifts['Día de la semana'] != 'Domingo']
+fteshifts['Día de la semana'] = fteshifts['StartTime'].apply(lambda x: spanish_days[x.weekday()])
+fteshifts['Fecha en Español'] = fteshifts['StartTime'].apply(format_date_to_spanish)
+fteshifts = fteshifts[fteshifts['Día de la semana'] != 'domingo']
 
 # Define the time zones
 utc = pytz.timezone('UTC')

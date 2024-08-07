@@ -85,9 +85,9 @@ shifts_file = 'SFshifts_query.xlsx'
 resources_file = 'resource_query.csv'
 mapping_file = 'mapping.xlsx'
 
-fteshifts = pd.read_excel(shifts_file, dtype=shifts_columns_to_string)
+fteshifts = pd.read_excel(shifts_file, dtype=shifts_columns_to_string, engine='openpyxl')
 resources = pd.read_csv(resources_file, dtype=resources_columns_to_string)
-mapping = pd.read_excel(mapping_file)
+mapping = pd.read_excel(mapping_file, engine='openpyxl')
 
 # Convert date columns to datetime
 fteshifts['StartTime'] = pd.to_datetime(fteshifts['Shift[StartTime]'], errors='coerce')
